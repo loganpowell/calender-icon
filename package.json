@@ -1,0 +1,19 @@
+{
+  "name": "calender-icon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loganpowell/calender-icon.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/loganpowell/calender-icon/issues"
+  },
+  "homepage": "https://github.com/loganpowell/calender-icon#readme"
+}

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <title>calendar icon maker</title>
+  </head>
+  <body>
+    <div>
+      <p>Make your calendar</p>
+      <form id="target">
+        <input id="today" type="date" />
+        <input type="submit" value="render calendar icon" />
+      </form>
+    </div>
+    <div>
+      <p>Rendered:</p>
+      <div
+        style="
+          width: 90px;
+          height: auto;
+          outline: 3px solid #ff7043;
+          display: flex;
+          flex-direction: column;
+          padding: 0px;
+        "
+      >
+        <div
+          id="mon"
+          style="
+            width: auto;
+            background-color: #ff7043;
+            font-weight: 600;
+            font-size: 1.4rem;
+            padding: 0.25rem;
+            margin: 0px;
+            text-align: center;
+            color: white;
+            font-family: Inter;
+          "
+        ></div>
+        <div
+          id="day"
+          style="
+            width: auto;
+            font-weight: 600;
+            font-size: 3rem;
+            padding: 0.25rem;
+            margin: 0px;
+            text-align: center;
+            color: charcoal;
+            font-family: Inter;
+          "
+        ></div>
+        <div
+          id="weekday"
+          style="
+            width: auto;
+            font-weight: 400;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+            text-align: center;
+            color: charcoal;
+            font-family: Inter;
+          "
+        ></div>
+      </div>
+    </div>
+  </body>
+  <script>
+    Date.prototype.toDateInputValue = function () {
+      var local = new Date(this);
+      local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+      return local.toJSON().slice(0, 10);
+    };
+
+    const now = new Date().toDateInputValue();
+    const date = document.getElementById("today");
+    date.value = now;
+    console.log("now:", now);
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const dayNames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+    const createDate = (e) => {
+      e.preventDefault();
+      const date = new Date(e.target[0].valueAsDate);
+      const month = monthNames[date.getMonth()];
+      const weekday = dayNames[date.getDay()];
+      const day = date.getDate() + 1;
+      console.log(weekday, month, day);
+      console.log(e);
+      let mon = document.getElementById("mon");
+      mon.innerText = month.toUpperCase();
+      let _day = document.getElementById("day");
+      _day.innerText = day;
+      let wkd = document.getElementById("weekday");
+      wkd.innerText = weekday.toUpperCase();
+    };
+    createDate({ preventDefault: () => {}, target: [{ valueAsDate: now }] });
+    const form = document.getElementById("target");
+    form.addEventListener("submit", createDate, true);
+    console.log("form:", form);
+  </script>
+</html>
